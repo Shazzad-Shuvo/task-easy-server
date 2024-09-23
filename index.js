@@ -37,7 +37,19 @@ async function run() {
 
 
 
-    
+    app.get('/tasks', async(req, res) =>{
+      const cursor = taskCollection.find();
+      const result = await cursor.toArray();
+        res.send(result);
+    })
+
+    app.post('/tasks', async(req, res) =>{
+      const newTask = req.body;
+      
+      const result = await taskCollection.insertOne(newTask);
+      res.send(result);
+    })
+
 
 
 
